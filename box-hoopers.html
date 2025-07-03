@@ -1,10 +1,61 @@
 <!DOCTYPE html>
-<html lang = "en">
+<html lang = 'en'>
 
     <head>
-        <meta charset = "UTF-8">
-        <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
+        <meta charset = 'UTF-8'>
+        <meta name = 'viewport' content = 'width=device-width, initial-scale=1.0'>
         <title>Box Hoopers</title>
+    
+
+        <style>
+            /* Creating the player box */
+            body 
+            {
+                margin: 0; /* Have 0 space around the body */
+                overflow: hidden; /* If the box (or anything in the body) goes outside the viewport, hide whatever part of it is outside. This prevents scrollbars from appearing */
+                height: 100vh; /* the body will take up 100% of the viewport height */
+                background-color: #f0f0;
+            }
+
+            #p1-box /* p1-box is the element ID */
+            {
+                position: absolute; /* allow left and bottom to activate. Position will be chosen by this, because it is now absolute */
+                bottom: 0; /* Bottom-edge of box is at the bottom of the viewport */
+                left: 50%; /* move the left edge of the box to 50% of the viewport */
+                transform: translateX(-50%);
+                width: 50px;
+                height: 50px;
+                background-color: lightblue;
+                transition: bottom 0.1s ease;
+            }
+        </style>
     </head>
+    
+    <body>
+
+        <div id = 'p1-box'> </div>
+
+        <script>
+            const p1Box = document.getElementById('p1-box');
+            let isHopping = false;
+            let vert = 150;
+
+            document.addEventListener('keydown', (e) => 
+            {
+                if (e.code === 'Space' && !isHopping)
+                {  
+                    isHopping = true;
+                    p1Box.style.bottom = vert + 'px';
+
+                    // Gravity Simulation
+                    setTimeout(() =>
+                    {
+                        p1Box.style.bottom = '0px';
+                        isHopping = false;
+                    }, 300);   
+                }
+            });
+        </script>
+    </body>
 
 </html>
